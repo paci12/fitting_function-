@@ -1,0 +1,19 @@
+# 定义函数用于生成拟合函数的验证与测试数据
+function1:
+  name: function1
+  expression: "200 * exp(-((x-1)**2 + (y-2)**2 + (z-3)**2 + (w-4)**2)) + 50 * sin(x) * cos(y) + log(1 + z**2 + w**2)"
+  variables: [x,y,z,w] 
+  max_point: {x: 1,y: 2,z: 3,w: 4}
+  train:
+    10000
+  val:
+    1000
+  test:
+    1000
+
+function2:
+  name : function2
+  expression: "100 * exp(-x) * sin(y) + 100 * exp(-z) * cos(w)"
+  variables: [x,y,z,w]
+
+
