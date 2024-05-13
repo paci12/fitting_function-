@@ -13,7 +13,24 @@ function1:
 
 function2:
   name : function2
-  expression: "100 * exp(-x) * sin(y) + 100 * exp(-z) * cos(w)"
+  expression: "100  * sin(x) + 100 * cos(y)+w*z"
   variables: [x,y,z,w]
+  train:
+    100000
+  val:
+    2000
+  test:
+    2000
+
+function3:
+  name : function3
+  expression: "100 * sin(x) + y"
+  variables: [x,y]
+  train:
+    50000
+  val:
+    200
+  test:
+    200
 
 
