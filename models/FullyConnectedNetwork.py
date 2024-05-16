@@ -37,23 +37,33 @@ import torch.nn.functional as F
 #         x = self.fc7(x)
 #         return x
 class FullyConnectedNetwork(nn.Module):
-    def __init__(self, input_size, hidden_sizes, output_size, dropout_rate=0.3):
+    def __init__(self, input_size, hidden_sizes, output_size, dropout_rate=0.2):
         super(FullyConnectedNetwork, self).__init__()
         layers = []
         prev_size = input_size
         for hidden_size in hidden_sizes:
             layers.append(nn.Linear(prev_size, hidden_size))
             layers.append(nn.BatchNorm1d(hidden_size))
-            layers.append(nn.ReLU())
+            layers.append(nn.Tanh())
             layers.append(nn.Dropout(dropout_rate))
             prev_size = hidden_size
         layers.append(nn.Linear(prev_size, output_size))
         self.model = nn.Sequential(*layers)
-        self.sigmoid = nn.Sigmoid()
 
 
     def forward(self, x):
         x = self.model(x)
-        # x = self.sigmoid(x)
         return x
+    # def __init__(self):
+    #     super(FullyConnectedNetwork, self).__init__()
+    #     self.linear_relu_stack = nn.Sequential(
+    #         nn.Linear(1, 70),
+    #         nn.Sigmoid(),
+    #         nn.Linear(70, 1)
+    #     )
+    #
+    # def forward(self, x):
+    #     x = self.linear_relu_stack(x)
+    #     return x
+
 

@@ -18,7 +18,8 @@ mean = train_data.iloc[:, :-1].values.mean(axis=0)
 std = train_data.iloc[:, :-1].values.std(axis=0)
 
 # 创建模型实例
-model = FullyConnectedNetwork(2, [16, 32, 64, 128, 256, 512, 256, 128, 64, 32, 16], 1)
+# model = FullyConnectedNetwork(2, [16, 32, 64, 128, 256, 512, 256, 128, 64, 32, 16], 1)
+model = FullyConnectedNetwork(8, [70, 70,70, 70], 1)
 
 # 加载保存的模型参数
 model.load_state_dict(torch.load(r'E:\Workspace\function_fitting\result\best_model.pth'))
@@ -27,11 +28,12 @@ model.load_state_dict(torch.load(r'E:\Workspace\function_fitting\result\best_mod
 model.eval()
 
 # 假设新的输入数据为
-new_input = np.array([[60.75448519014384, 17.052412368729154]])  # 你需要替换 x, y, z, w 为实际的数值
-
+new_input = np.array([[8,7,5,4,10,12,11,8]])  # 你需要替换 x, y, z, w 为实际的数值
+# 3 * x + y + 5 * z + w ** 2 - e + 1.8 * r + t ** 2 + 100 * log(g)
+standardized_input = torch.tensor(new_input, dtype=torch.float32)
 # 标准化新的输入数据
-standardized_input = standardize(new_input, mean, std)
-standardized_input = torch.tensor(standardized_input, dtype=torch.float32)
+# standardized_input = standardize(new_input, mean, std)
+# standardized_input = torch.tensor(standardized_input, dtype=torch.float32)
 
 # 使用模型进行预测
 with torch.no_grad():
